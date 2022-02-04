@@ -1,17 +1,21 @@
 import React, { useState, VFC } from 'react';
 import {
   Keyboard,
+  KeyboardAvoidingView,
+  Platform,
   StyleSheet,
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
+import { useSelector } from 'react-redux';
 
 import { Button } from '~components/common/button';
 import { Header } from '~components/common/header';
 import { MainInput } from '~components/common/main-input';
 import { MainText } from '~components/common/main-text';
 import { Hostess } from '~components/layouts/hostess';
+import inputsSelectors from '~store/redux/inputs/inputs.selectors';
 import { signInWithEmailAndPass } from './utils/signInWithEmailAndPass';
 import { signUpWithEmailAndPass } from './utils/signUpWithEmailAndPass';
 
@@ -37,56 +41,65 @@ export const Auth: VFC = () => {
     }
   };
 
+  const isInputFocused = useSelector(inputsSelectors.isFocused);
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.wrapper}>
-        <Hostess image={require('~assets/images/auth.png')}>
-          <View style={styles.infoBlock}>
-            <View style={styles.emptyBlock} />
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={{ flex: 1 }}
+        >
+          <Hostess image={require('~assets/images/auth.png')}>
+            <View style={styles.infoBlock}>
+              <View style={styles.emptyBlock} />
 
-            <Header size="big">Recipipe</Header>
-            <MainText fs={17} lh={21}>
-              All recipes in one place
-            </MainText>
-            <MainInput
-              placeholder="Email"
-              value={email}
-              onChange={setEmail}
-              type="email-address"
-              style={styles.email}
-            />
-            <MainInput
-              placeholder="Password"
-              value={password}
-              onChange={setPassword}
-              isSecure
-              style={styles.password}
-            />
-            <Button
-              title={isNewUser ? 'Sign up' : 'Sign in'}
-              onPress={onSubmitHandler}
-              isLoading={isAuthenticating}
-              disabled={isAuthenticating}
-            />
-          </View>
-        </Hostess>
-        <View style={[styles.footer]}>
-          <View style={styles.footerTextWrapper}>
-            <MainText lh={20}>
-              {isNewUser
-                ? 'Already have an account? '
-                : 'Don’t have an account? '}
-            </MainText>
-            <TouchableOpacity
-              onPress={onChangeAuthScreen}
-              style={styles.linkWrapper}
-            >
-              <MainText lh={20} color="third">
-                {isNewUser ? 'Sign in' : 'Sign up'}
+              <Header size="big">Recipipe</Header>
+              <MainText fs={17} lh={21}>
+                All recipes in one place
               </MainText>
-            </TouchableOpacity>
+              <MainInput
+                placeholder="Email"
+                value={email}
+                onChange={setEmail}
+                type="email-address"
+                style={styles.email}
+              />
+              <MainInput
+                placeholder="Password"
+                value={password}
+                onChange={setPassword}
+                isSecure
+                style={styles.password}
+              />
+              <Button
+                title={isNewUser ? 'Sign up' : 'Sign in'}
+                onPress={onSubmitHandler}
+                isLoading={isAuthenticating}
+                disabled={isAuthenticating}
+              />
+            </View>
+          </Hostess>
+        </KeyboardAvoidingView>
+        {!isInputFocused && (
+          <View style={[styles.footer]}>
+            <View style={styles.footerTextWrapper}>
+              <MainText lh={20}>
+                {isNewUser
+                  ? 'Already have an account? '
+                  : 'Don’t have an account? '}
+              </MainText>
+              <TouchableOpacity
+                onPress={onChangeAuthScreen}
+                style={styles.linkWrapper}
+              >
+                <MainText lh={20} color="third">
+                  {isNewUser ? 'Sign in' : 'Sign up'}
+                </MainText>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
+        )}
       </View>
     </TouchableWithoutFeedback>
   );

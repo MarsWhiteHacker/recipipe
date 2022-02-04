@@ -1,20 +1,16 @@
 import React, { useState, VFC } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import {
-  ActivityIndicator,
-  KeyboardAvoidingView,
-  Platform,
-  StyleSheet,
-  View,
-} from 'react-native';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
+import { Provider } from 'react-redux';
 
 import { TabNavigation } from '~navigations/tab-navigation/tab-navigation';
 import { Auth } from '~screens/auth/auth';
 import { Welcome } from '~screens/welcome';
 import { useInitializeFirebase } from '~hooks/useInitializeFirabase';
 import globalStyles from './src/global/constants.style';
+import store from './src/store/redux';
 
 const theme = DefaultTheme;
 theme.colors.background = globalStyles.BG_COLOR_MAIN;
@@ -40,10 +36,7 @@ const App: VFC = () => {
   }
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.container}
-    >
+    <Provider store={store}>
       <NavigationContainer theme={theme}>
         {isUserLogged ? (
           <TabNavigation />
@@ -53,7 +46,7 @@ const App: VFC = () => {
         )}
         <StatusBar style="auto" />
       </NavigationContainer>
-    </KeyboardAvoidingView>
+    </Provider>
   );
 };
 

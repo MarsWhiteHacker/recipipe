@@ -12,15 +12,27 @@ import {
   TabNavigationState,
 } from '@react-navigation/native';
 import { BottomTabNavigationEventMap } from '@react-navigation/bottom-tabs/lib/typescript/src/types'; // eslint-disable-line
+import { useSelector } from 'react-redux';
 
 import globalStyles from '~global/constants.style';
 import { PlusSVG } from '~components/common/svg/plus-svg';
+import inputsSelectors from '~store/redux/inputs/inputs.selectors';
 import { imagePicker } from './utils/iconPicker';
 import { TabScreensType } from '../tab-navigation.keys';
 
 export const TabBar: VFC<Props> = ({ state, navigation }) => {
+  const isInputFocused = useSelector(inputsSelectors.isFocused);
+
   return (
-    <View style={styles.wrapper}>
+    <View
+      style={[
+        styles.wrapper,
+        {
+          display: isInputFocused ? 'none' : 'flex',
+          opacity: isInputFocused ? 0 : 1,
+        },
+      ]}
+    >
       {state.routes.map((route, index) => {
         const isFocused = state.index === index;
 
@@ -92,7 +104,6 @@ type Props = {
 
 const styles = StyleSheet.create({
   wrapper: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
@@ -101,6 +112,8 @@ const styles = StyleSheet.create({
     height: globalStyles.TAB_HEIGHT,
     paddingBottom: 25,
     position: 'relative',
+    borderTopWidth: globalStyles.BORDER_WIDTH,
+    borderTopColor: globalStyles.BORDER_COLOR,
   },
   tabButtonWrapper: {
     flex: 1,

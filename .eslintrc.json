@@ -62,7 +62,8 @@
     "react/destructuring-assignment": 0,
     "no-unused-vars": 0,
     "import/no-extraneous-dependencies": 0,
-    "no-return-assign": 0
+    "no-return-assign": 0,
+    "react-hooks/exhaustive-deps": 0
   },
   "overrides": [
     {

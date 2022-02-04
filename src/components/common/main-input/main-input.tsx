@@ -6,8 +6,10 @@ import {
   TextInput,
   TextStyle,
 } from 'react-native';
+import { useDispatch } from 'react-redux';
 
 import globalStyles from '~global/constants.style';
+import { inputsActions } from '~store/redux/inputs';
 
 export const MainInput: VFC<Props> = ({
   value,
@@ -17,6 +19,17 @@ export const MainInput: VFC<Props> = ({
   isSecure,
   onChange,
 }) => {
+  const dispatch = useDispatch();
+
+  const onFocusHandler = () => {
+    dispatch(inputsActions.inputsFocusStateOn(true));
+  };
+
+  const onBlurHandler = () => {
+    setTimeout(() => {
+      dispatch(inputsActions.inputsFocusStateOn(false));
+    }, 200);
+  };
   return (
     <TextInput
       style={[styles.input, style]}
@@ -26,6 +39,8 @@ export const MainInput: VFC<Props> = ({
       placeholderTextColor={globalStyles.PLACEHOLDER_COLOR}
       keyboardType={type}
       secureTextEntry={isSecure}
+      onBlur={onBlurHandler}
+      onFocus={onFocusHandler}
     />
   );
 };

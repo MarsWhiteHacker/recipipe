@@ -1,46 +1,57 @@
 import React, { VFC } from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Image, StyleSheet, View, Pressable } from 'react-native';
+
 import { Header } from '~components/common/header';
 import { MainText } from '~components/common/main-text';
 import { LogoSmallSVG } from '~components/common/svg';
-
 import globalStyles from '~global/constants.style';
+import { RootHomeStackParamList } from '~navigations/stack-home-navigation';
+
+type HomeScreenStackNavigationProp =
+  NativeStackNavigationProp<RootHomeStackParamList>;
 
 export const ScrollScreen: VFC<Props> = ({ width }) => {
+  const { navigate } = useNavigation<HomeScreenStackNavigationProp>();
   const innerBlockWrapperPadding = 12;
   const innerBlockWidthSidesMargin = 20;
   const innerBlockWidth =
     width - innerBlockWrapperPadding * 2 - innerBlockWidthSidesMargin * 2;
 
+  const onPressHandler = () => navigate('Recipe', { name: 'Tarts' });
+
   return (
-    <View
-      style={[
-        styles.wrapper,
-        {
-          width,
-        },
-      ]}
-    >
-      <View style={styles.innerBlock}>
-        <View style={styles.imageWrapper}>
-          <Image
-            source={require('~assets/images/home1.png')}
-            style={styles.image}
-          />
-        </View>
-        <View style={[styles.infoBlock, { width: innerBlockWidth }]}>
-          <View style={styles.logoCircle}>
-            <LogoSmallSVG fill={globalStyles.MAIN_COLOR} />
+    <Pressable onPress={onPressHandler}>
+      <View
+        style={[
+          styles.wrapper,
+          {
+            width,
+          },
+        ]}
+      >
+        <View style={styles.innerBlock}>
+          <View style={styles.imageWrapper}>
+            <Image
+              source={require('~assets/images/home1.png')}
+              style={styles.image}
+            />
           </View>
-          <Header size="medium" style={styles.headerBlock}>
-            Tarts
-          </Header>
-          <MainText color="second" ta="center" style={styles.textBlock}>
-            Keep it easy with these simple but delicious recipes.
-          </MainText>
+          <View style={[styles.infoBlock, { width: innerBlockWidth }]}>
+            <View style={styles.logoCircle}>
+              <LogoSmallSVG fill={globalStyles.MAIN_COLOR} />
+            </View>
+            <Header size="medium" style={styles.headerBlock}>
+              Tarts
+            </Header>
+            <MainText color="second" ta="center" style={styles.textBlock}>
+              Keep it easy with these simple but delicious recipes.
+            </MainText>
+          </View>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
