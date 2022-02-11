@@ -1,9 +1,9 @@
 import React, { useCallback, VFC } from 'react';
 import { SectionList, StyleSheet, View } from 'react-native';
+import { ListItem } from '~components/common/list-item';
 
 import globalStyles from '~global/constants.style';
 import { ListHeader } from './list-header/list-header';
-import { ListItem } from './list-item/list-item';
 
 export const ScrollSearch: VFC = () => {
   // TODO: replace by real data when server is ready
@@ -66,7 +66,7 @@ export const ScrollSearch: VFC = () => {
     <SectionList
       sections={data}
       keyExtractor={keyExtractor}
-      renderItem={({ item }) => <ListItem data={item} />}
+      renderItem={({ item }) => <ListItem data={item} buttonType="like" />}
       renderSectionHeader={({ section: { title } }) => (
         <ListHeader title={title} />
       )}

@@ -1,6 +1,8 @@
 import React, { VFC } from 'react';
 import { StyleSheet, View } from 'react-native';
+
 import { Header } from '~components/common/header';
+import globalStyles from '~global/constants.style';
 
 export const ListHeader: VFC<Props> = ({ title }) => {
   return (
@@ -16,9 +18,10 @@ type Props = {
 
 const styles = StyleSheet.create({
   listHeaderWrapper: {
-    marginBottom: 16,
-    marginTop: 16,
-    marginRight: 16,
+    paddingBottom: 16,
     marginLeft: 16,
+    marginRight: 16,
+    paddingTop: 16,
+    backgroundColor: globalStyles.BG_COLOR_SECOND,
   },
 });

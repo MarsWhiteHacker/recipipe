@@ -1,5 +1,11 @@
 import React, { useEffect, useRef, useState, VFC } from 'react';
-import { Animated, StyleSheet, useWindowDimensions, View } from 'react-native';
+import {
+  Animated,
+  ImageSourcePropType,
+  StyleSheet,
+  useWindowDimensions,
+  View,
+} from 'react-native';
 
 import globalStyles from '~global/constants.style';
 import { SliderDots } from '~components/common/slider-dots';
@@ -56,7 +62,7 @@ export const SliderHome: VFC<Props> = ({ data }) => {
         decelerationRate="fast"
       >
         {data.map((item, i) => (
-          <ScrollScreen key={i} width={scrollScreenWidth} />
+          <ScrollScreen key={i} width={scrollScreenWidth} data={item} />
         ))}
       </Animated.ScrollView>
       <View style={styles.dotsWrapper}>
@@ -71,7 +77,11 @@ export const SliderHome: VFC<Props> = ({ data }) => {
 };
 
 type Props = {
-  data: Array<number>;
+  data: Array<{
+    title: string;
+    link: ImageSourcePropType;
+    id: number;
+  }>;
 };
 
 const styles = StyleSheet.create({

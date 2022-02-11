@@ -25,19 +25,54 @@ export const Home: VFC = () => {
       link: require('~assets/images/cakes.png'),
       name: 'Cakes',
     },
+    {
+      link: require('~assets/images/mousse.png'),
+      name: 'Mousse',
+    },
+    {
+      link: require('~assets/images/bred.png'),
+      name: 'Bred',
+    },
   ];
+
+  const mockForSlider = [
+    {
+      title: 'Tarts',
+      link: require('~assets/images/home1.png'),
+      id: 1,
+    },
+    {
+      title: 'Catalana Mousse',
+      link: require('~assets/images/welcome1.png'),
+      id: 2,
+    },
+    {
+      title: 'Tarts',
+      link: require('~assets/images/home1.png'),
+      id: 3,
+    },
+  ];
+
   return (
     <ScrollView style={styles.wrapper}>
-      <HomeHeader style={styles.header} />
-      {/* TODO: replace with real data */}
-      <SliderHome data={[1, 2, 3]} />
+      <View style={styles.container}>
+        <HomeHeader style={styles.header} />
+        {/* TODO: replace with real data */}
+        <SliderHome data={mockForSlider} />
 
-      <Header size="medium" style={styles.categoryHeader}>
-        Category
-      </Header>
+        <Header size="medium" style={styles.categoryHeader}>
+          Category
+        </Header>
+      </View>
       <View style={styles.categoriesWrapper}>
         {mockArray.map((category, i) => (
-          <CardCategory key={i} link={category.link} name={category.name} />
+          <CardCategory
+            key={i}
+            link={category.link}
+            name={category.name}
+            windowWidthRatio={i === 0 || i === 1 ? 2 : 4}
+            heightRatio={i === 0 || i === 1 ? 1.05 : 1}
+          />
         ))}
       </View>
     </ScrollView>
@@ -47,6 +82,8 @@ export const Home: VFC = () => {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
+  },
+  container: {
     paddingLeft: 16,
     paddingRight: 16,
   },
@@ -60,7 +97,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-between',
     marginBottom: 32,
+    paddingLeft: 8,
+    paddingRight: 8,
   },
 });

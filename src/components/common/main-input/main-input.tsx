@@ -4,6 +4,8 @@ import {
   StyleProp,
   StyleSheet,
   TextInput,
+  TextInputAndroidProps,
+  TextInputIOSProps,
   TextStyle,
 } from 'react-native';
 import { useDispatch } from 'react-redux';
@@ -17,6 +19,8 @@ export const MainInput: VFC<Props> = ({
   type,
   style,
   isSecure,
+  autoCompleteType,
+  textContentType,
   onChange,
 }) => {
   const dispatch = useDispatch();
@@ -41,6 +45,8 @@ export const MainInput: VFC<Props> = ({
       secureTextEntry={isSecure}
       onBlur={onBlurHandler}
       onFocus={onFocusHandler}
+      autoCompleteType={autoCompleteType}
+      textContentType={textContentType}
     />
   );
 };
@@ -52,6 +58,8 @@ type Props = {
   type?: KeyboardTypeOptions;
   style?: StyleProp<TextStyle>;
   isSecure?: boolean;
+  autoCompleteType?: TextInputAndroidProps['autoCompleteType'];
+  textContentType?: TextInputIOSProps['textContentType'];
 };
 
 const styles = StyleSheet.create({

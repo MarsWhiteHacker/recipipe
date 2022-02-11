@@ -14,14 +14,19 @@ import { HeartSVG } from '~components/common/svg/heart-svg';
 import { Title } from '~components/common/title';
 import globalStyles from '~global/constants.style';
 import { RootSearchStackParamList } from '~navigations/stack-search-navigation';
+import { SettingsSVG } from '../svg/settings-svg';
 
 type SearchScreenStackNavigationProp =
   NativeStackNavigationProp<RootSearchStackParamList>;
 
-export const ListItem: VFC<Props> = ({ data }) => {
+export const ListItem: VFC<Props> = ({ data, buttonType }) => {
   const { navigate } = useNavigation<SearchScreenStackNavigationProp>();
 
-  const onPressHandler = () => navigate('Category', { name: data.title });
+  const onPressHandler = () =>
+    navigate(data.category as keyof RootSearchStackParamList, {
+      name: data.title,
+      image: data.link,
+    });
 
   return (
     <TouchableWithoutFeedback onPress={onPressHandler}>
@@ -30,14 +35,23 @@ export const ListItem: VFC<Props> = ({ data }) => {
         <View style={styles.itemListInfo}>
           <Title size="small">{data.title}</Title>
           <View style={styles.listTag}>
-            <MainText fs={12} lh={15}>
+            <MainText fs={12} lh={15} color="second">
               {data.category}
             </MainText>
           </View>
-          {data.isLiked && (
-            <View style={styles.listHeart}>
-              <HeartSVG fill={globalStyles.MAIN_COLOR} />
-            </View>
+          {data.isLiked && buttonType === 'like' && (
+            <TouchableWithoutFeedback onPress={() => alert('Pressed!')}>
+              <View style={styles.listHeart}>
+                <HeartSVG fill={globalStyles.MAIN_COLOR} />
+              </View>
+            </TouchableWithoutFeedback>
+          )}
+          {buttonType === 'settings' && (
+            <TouchableWithoutFeedback onPress={() => alert('Pressed!')}>
+              <View style={styles.listHeart}>
+                <SettingsSVG fill={globalStyles.PLACEHOLDER_COLOR} />
+              </View>
+            </TouchableWithoutFeedback>
           )}
         </View>
       </View>
@@ -53,6 +67,7 @@ type Props = {
     isLiked: boolean;
     id: number;
   };
+  buttonType: 'like' | 'settings';
 };
 
 const styles = StyleSheet.create({

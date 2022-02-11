@@ -64,6 +64,8 @@ export const Auth: VFC = () => {
                 onChange={setEmail}
                 type="email-address"
                 style={styles.email}
+                autoCompleteType="email"
+                textContentType="emailAddress"
               />
               <MainInput
                 placeholder="Password"
@@ -71,6 +73,8 @@ export const Auth: VFC = () => {
                 onChange={setPassword}
                 isSecure
                 style={styles.password}
+                autoCompleteType="password"
+                textContentType="password"
               />
               <Button
                 title={isNewUser ? 'Sign up' : 'Sign in'}

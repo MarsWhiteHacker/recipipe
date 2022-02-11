@@ -17,20 +17,16 @@ export const TabNavigation: React.FC = () => {
       tabBar={(props) => <TabBar {...props} />}
       screenOptions={{
         tabBarHideOnKeyboard: true,
-        headerTitle: (props) => <Header size="small">{props.children}</Header>,
+        headerShown: false,
       }}
     >
       <Tab.Screen
         name={TabNavigationKeys.Home}
         component={StackHomeNavigation}
-        options={{
-          headerShown: false,
-        }}
       />
       <Tab.Screen
         name={TabNavigationKeys.Search}
         component={StackSearchNavigation}
-        options={{ title: 'Search Recipe' }}
       />
       <Tab.Screen name={TabNavigationKeys.Favourite} component={Favourite} />
       <Tab.Screen name={TabNavigationKeys.Profile} component={Profile} />

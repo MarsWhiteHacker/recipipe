@@ -5,7 +5,9 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
+  Platform,
 } from 'react-native';
+import { Header } from '~components/common/header';
 import { SearchInput } from '~components/common/search-input';
 import { ScrollSearch } from '~components/scroll-search';
 import globalStyles from '~global/constants.style';
@@ -16,6 +18,11 @@ export const Search: VFC = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.wrapper}>
+        <View
+          style={[styles.header, { height: Platform.OS === 'ios' ? 90 : 60 }]}
+        >
+          <Header size="small">Search Recipe</Header>
+        </View>
         <View style={styles.inputWrapper}>
           <SearchInput
             value={searchText}
@@ -35,9 +42,15 @@ const styles = StyleSheet.create({
     backgroundColor: globalStyles.BG_COLOR_SECOND,
   },
   inputWrapper: {
-    marginBottom: 16,
-    marginTop: 16,
-    marginRight: 16,
-    marginLeft: 16,
+    margin: 16,
+    backgroundColor: '#fff',
+  },
+  header: {
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    borderBottomWidth: globalStyles.BORDER_WIDTH,
+    borderBottomColor: globalStyles.BORDER_COLOR,
   },
 });

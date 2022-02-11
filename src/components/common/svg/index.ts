@@ -4,3 +4,4 @@ export * from './favourite-svg';
 export * from './profile-svg';
 export * from './logo-svg';
 export * from './logo-small-svg';
+export * from './smallPlus-svg';

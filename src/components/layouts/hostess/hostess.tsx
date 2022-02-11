@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
 import { View, StyleSheet, ImageSourcePropType, ViewStyle } from 'react-native';
 
-import { SquareImage } from '~components/common/square-image';
+import { RatioImage } from '~components/common/ratio-image';
 import globalStyle from '~global/constants.style';
 
 export const Hostess: FC<Props> = ({ children, image, style }) => {
   return (
     <View style={[style && style, styles.container]}>
       <View style={styles.imageWrapper}>
-        <SquareImage source={image} />
+        <RatioImage source={image} heightRatio={1} />
       </View>
       <View style={styles.transparentBlock} />
       <View style={styles.infoBlock}>{children}</View>

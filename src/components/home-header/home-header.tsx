@@ -1,5 +1,5 @@
 import React, { VFC } from 'react';
-import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import { Platform, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
 import { MainText } from '~components/common/main-text';
 import { BellSVG } from '~components/common/svg/bell-svg';
@@ -8,7 +8,13 @@ import { Title } from '~components/common/title';
 
 export const HomeHeader: VFC<Props> = ({ style }) => {
   return (
-    <View style={[styles.header, style]}>
+    <View
+      style={[
+        styles.header,
+        style,
+        { marginTop: Platform.OS === 'ios' ? 75 : 32 },
+      ]}
+    >
       <View style={styles.headerIcon}>
         <ChefSVG />
       </View>
@@ -33,7 +39,6 @@ const styles = StyleSheet.create({
   header: {
     height: 50,
     width: '100%',
-    marginTop: 75,
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',

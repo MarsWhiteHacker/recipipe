@@ -1,7 +1,13 @@
 import React, { VFC } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { Image, StyleSheet, View, Pressable } from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  View,
+  Pressable,
+  ImageSourcePropType,
+} from 'react-native';
 
 import { Header } from '~components/common/header';
 import { MainText } from '~components/common/main-text';
@@ -12,14 +18,15 @@ import { RootHomeStackParamList } from '~navigations/stack-home-navigation';
 type HomeScreenStackNavigationProp =
   NativeStackNavigationProp<RootHomeStackParamList>;
 
-export const ScrollScreen: VFC<Props> = ({ width }) => {
+export const ScrollScreen: VFC<Props> = ({ width, data }) => {
   const { navigate } = useNavigation<HomeScreenStackNavigationProp>();
   const innerBlockWrapperPadding = 12;
   const innerBlockWidthSidesMargin = 20;
   const innerBlockWidth =
     width - innerBlockWrapperPadding * 2 - innerBlockWidthSidesMargin * 2;
 
-  const onPressHandler = () => navigate('Recipe', { name: 'Tarts' });
+  const onPressHandler = () =>
+    navigate('Recipe', { name: data.title, image: data.link });
 
   return (
     <Pressable onPress={onPressHandler}>
@@ -33,17 +40,14 @@ export const ScrollScreen: VFC<Props> = ({ width }) => {
       >
         <View style={styles.innerBlock}>
           <View style={styles.imageWrapper}>
-            <Image
-              source={require('~assets/images/home1.png')}
-              style={styles.image}
-            />
+            <Image source={data.link} style={styles.image} />
           </View>
           <View style={[styles.infoBlock, { width: innerBlockWidth }]}>
             <View style={styles.logoCircle}>
               <LogoSmallSVG fill={globalStyles.MAIN_COLOR} />
             </View>
             <Header size="medium" style={styles.headerBlock}>
-              Tarts
+              {data.title}
             </Header>
             <MainText color="second" ta="center" style={styles.textBlock}>
               Keep it easy with these simple but delicious recipes.
@@ -57,6 +61,11 @@ export const ScrollScreen: VFC<Props> = ({ width }) => {
 
 type Props = {
   width: number;
+  data: {
+    title: string;
+    link: ImageSourcePropType;
+    id: number;
+  };
 };
 
 const styles = StyleSheet.create({
