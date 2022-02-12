@@ -13,10 +13,10 @@ import { Header } from '~components/common/header';
 import { MainText } from '~components/common/main-text';
 import { LogoSmallSVG } from '~components/common/svg';
 import globalStyles from '~global/constants.style';
-import { RootHomeStackParamList } from '~navigations/stack-home-navigation';
+import { RootStackParamList } from '~navigations/stack-navigation';
 
 type HomeScreenStackNavigationProp =
-  NativeStackNavigationProp<RootHomeStackParamList>;
+  NativeStackNavigationProp<RootStackParamList>;
 
 export const ScrollScreen: VFC<Props> = ({ width, data }) => {
   const { navigate } = useNavigation<HomeScreenStackNavigationProp>();

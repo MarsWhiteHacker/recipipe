@@ -7,20 +7,21 @@ import {
   CategoryParamsType,
   categoryScreenOptions,
 } from '~navigations/stack-navigation-common/stack-navigation-category';
-import * as StackHomeNavigationKeys from './stack-home-navigation.keys';
+import { Favourite } from '~screens/favourite';
+import * as StackFavouriteNavigationKeys from './stack-favourite-navigation.keys';
 
-const Stack = createNativeStackNavigator<RootHomeStackParamList>();
+const Stack = createNativeStackNavigator<RootFavouriteStackParamList>();
 
-export const StackHomeNavigation: React.FC = () => {
+export const StackFavouriteNavigation: React.FC = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name={StackHomeNavigationKeys.Main}
-        component={Home}
+        name={StackFavouriteNavigationKeys.Main}
+        component={Favourite}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name={StackHomeNavigationKeys.Category}
+        name={StackFavouriteNavigationKeys.Category}
         component={Category}
         options={categoryScreenOptions}
       />
@@ -28,7 +29,7 @@ export const StackHomeNavigation: React.FC = () => {
   );
 };
 
-export type RootHomeStackParamList = {
-  [StackHomeNavigationKeys.Main]: undefined;
-  [StackHomeNavigationKeys.Category]: CategoryParamsType;
+export type RootFavouriteStackParamList = {
+  [StackFavouriteNavigationKeys.Main]: undefined;
+  [StackFavouriteNavigationKeys.Category]: CategoryParamsType;
 };

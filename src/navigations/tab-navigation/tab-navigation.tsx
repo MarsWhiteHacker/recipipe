@@ -3,9 +3,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { StackHomeNavigation } from '~navigations/stack-home-navigation';
 import { StackSearchNavigation } from '~navigations/stack-search-navigation';
-import { Favourite } from '~screens/favourite';
+import { StackFavouriteNavigation } from '~navigations/stack-favourite-navigation';
 import { Profile } from '~screens/profile';
-import { Header } from '~components/common/header';
 import * as TabNavigationKeys from './tab-navigation.keys';
 import { TabBar } from './tab-bar';
 
@@ -28,7 +27,10 @@ export const TabNavigation: React.FC = () => {
         name={TabNavigationKeys.Search}
         component={StackSearchNavigation}
       />
-      <Tab.Screen name={TabNavigationKeys.Favourite} component={Favourite} />
+      <Tab.Screen
+        name={TabNavigationKeys.Favourite}
+        component={StackFavouriteNavigation}
+      />
       <Tab.Screen name={TabNavigationKeys.Profile} component={Profile} />
     </Tab.Navigator>
   );

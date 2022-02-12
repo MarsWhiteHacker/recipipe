@@ -11,5 +11,5 @@ export const SettingsSVG: React.VFC<Props> = (props) => (
 );
 
 type Props = {
-  fill: string;
+  fill?: string;
 };

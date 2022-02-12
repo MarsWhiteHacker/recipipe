@@ -3,12 +3,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { Search } from '~screens/search';
 import { Category } from '~screens/category';
-import { Recipe } from '~screens/recipe';
 import {
   CategoryParamsType,
   categoryScreenOptions,
-  RecipeParamsType,
-  recipeScreenOptions,
 } from '~navigations/stack-navigation-common/stack-navigation-category';
 import * as StackSearchNavigationKeys from './stack-search-navigation.keys';
 
@@ -31,11 +28,6 @@ export const StackSearchNavigation: React.FC = () => {
         component={Category}
         options={categoryScreenOptions}
       />
-      <Stack.Screen
-        name={StackSearchNavigationKeys.Recipe}
-        component={Recipe}
-        options={recipeScreenOptions}
-      />
     </Stack.Navigator>
   );
 };
@@ -43,5 +35,4 @@ export const StackSearchNavigation: React.FC = () => {
 export type RootSearchStackParamList = {
   [StackSearchNavigationKeys.Main]: undefined;
   [StackSearchNavigationKeys.Category]: CategoryParamsType;
-  [StackSearchNavigationKeys.Recipe]: RecipeParamsType;
 };

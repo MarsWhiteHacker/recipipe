@@ -107,5 +107,7 @@ const styles = StyleSheet.create({
     paddingRight: 16,
     display: 'flex',
     flexDirection: 'row',
+    borderBottomColor: globalStyles.BORDER_COLOR,
+    borderBottomWidth: globalStyles.BORDER_WIDTH,
   },
 });

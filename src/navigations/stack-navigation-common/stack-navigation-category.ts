@@ -2,6 +2,7 @@ import { RouteProp } from '@react-navigation/native';
 import { ImageSourcePropType } from 'react-native';
 
 import { RootHomeStackParamList } from '~navigations/stack-home-navigation';
+import { RootStackParamList } from '~navigations/stack-navigation';
 import { RootSearchStackParamList } from '~navigations/stack-search-navigation';
 
 export const categoryScreenOptions = () => ({
@@ -26,6 +27,4 @@ export type RouteCategoryScreenType =
   | RouteProp<RootHomeStackParamList, 'Category'>
   | RouteProp<RootSearchStackParamList, 'Category'>;
 
-export type RouteRecipeScreenType =
-  | RouteProp<RootHomeStackParamList, 'Recipe'>
-  | RouteProp<RootSearchStackParamList, 'Recipe'>;
+export type RouteRecipeScreenType = RouteProp<RootStackParamList, 'Recipe'>;

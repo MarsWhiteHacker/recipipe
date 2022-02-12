@@ -5,10 +5,10 @@ import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Provider } from 'react-redux';
 
-import { TabNavigation } from '~navigations/tab-navigation/tab-navigation';
 import { Auth } from '~screens/auth/auth';
 import { Welcome } from '~screens/welcome';
 import { useInitializeFirebase } from '~hooks/useInitializeFirabase';
+import { StackNavigation } from '~navigations/stack-navigation';
 import globalStyles from './src/global/constants.style';
 import store from './src/store/redux';
 
@@ -39,7 +39,7 @@ const App: VFC = () => {
     <Provider store={store}>
       <NavigationContainer theme={theme}>
         {isUserLogged ? (
-          <TabNavigation />
+          <StackNavigation />
         ) : (
           /* <Welcome /> */
           <Auth />

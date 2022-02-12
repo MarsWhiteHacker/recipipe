@@ -1,7 +1,7 @@
 import React, { useCallback, useState, VFC } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 
-import { ButtonBack } from '~components/common/button-back';
+import { ButtonBack } from '~components/common/button-header';
 import { RatioImage } from '~components/common/ratio-image';
 import { RouteCategoryScreenType } from '~navigations/stack-navigation-common/stack-navigation-category';
 import globalStyles from '~global/constants.style';
@@ -58,11 +58,6 @@ export const Category: VFC<Props> = ({ route, navigation }) => {
 
   const keyExtractor = useCallback((item) => String(item.id), []);
 
-  const ItemSeparatorComponent = useCallback(
-    () => <View style={styles.separator} />,
-    [],
-  );
-
   return (
     <View style={styles.wrapper}>
       <RatioImage
@@ -73,6 +68,7 @@ export const Category: VFC<Props> = ({ route, navigation }) => {
       <ButtonBack
         style={[styles.backButton, { top: 60 }]}
         onPress={() => navigation.goBack()}
+        type="back"
       />
       <View style={styles.container}>
         <CardInfoSimple
@@ -97,7 +93,6 @@ export const Category: VFC<Props> = ({ route, navigation }) => {
         data={data}
         renderItem={renderItem}
         keyExtractor={keyExtractor}
-        ItemSeparatorComponent={ItemSeparatorComponent}
       />
     </View>
   );
@@ -141,10 +136,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-  },
-  separator: {
-    height: 1,
-    width: '100%',
-    backgroundColor: globalStyles.BORDER_COLOR,
   },
 });

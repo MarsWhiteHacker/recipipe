@@ -57,11 +57,6 @@ export const ScrollSearch: VFC = () => {
 
   const keyExtractor = useCallback((item) => String(item.id), []);
 
-  const ItemSeparatorComponent = useCallback(
-    () => <View style={styles.separator} />,
-    [],
-  );
-
   return (
     <SectionList
       sections={data}
@@ -70,15 +65,8 @@ export const ScrollSearch: VFC = () => {
       renderSectionHeader={({ section: { title } }) => (
         <ListHeader title={title} />
       )}
-      ItemSeparatorComponent={ItemSeparatorComponent}
     />
   );
 };
 
-const styles = StyleSheet.create({
-  separator: {
-    height: 1,
-    width: '100%',
-    backgroundColor: globalStyles.BORDER_COLOR,
-  },
-});
+const styles = StyleSheet.create({});

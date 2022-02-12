@@ -9,8 +9,8 @@ import {
 } from 'react-native';
 import { Header } from '~components/common/header';
 import { SearchInput } from '~components/common/search-input';
-import { ScrollSearch } from '~components/scroll-search';
 import globalStyles from '~global/constants.style';
+import { ScrollSearch } from './scroll-search';
 
 export const Search: VFC = () => {
   const [searchText, setSearchText] = useState('');
